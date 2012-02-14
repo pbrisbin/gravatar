@@ -1,0 +1,27 @@
+name:                gravatar
+version:             0.4
+description:         A yesod goody, gravatar
+synopsis:            Look up gravatar image urls by email address
+homepage:            http://github.com/pbrisbin/yesod-goodies/gravatar
+license:             BSD3
+license-file:        LICENSE
+author:              Patrick Brisbin
+maintainer:          me@pbrisbin.com
+category:            Web, Yesod
+build-type:          Simple
+cabal-version:       >=1.6
+
+library
+  exposed-modules: Network.Gravatar
+
+  build-depends: base       >= 4     && < 5
+               , text       >= 0.11  && < 0.12
+               , bytestring >= 0.9.1 && < 0.10
+               , pureMD5    < 3
+               , HTTP
+
+  ghc-options: -Wall
+  
+source-repository head
+  type:         git
+  location:     git://github.com/pbrisbin/yesod-goodies.git
