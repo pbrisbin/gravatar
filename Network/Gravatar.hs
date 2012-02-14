@@ -103,16 +103,12 @@ hashEmail = md5sum . T.toLower . T.strip
 
 addParams :: String -> GravatarOptions -> String
 addParams url opts = helper url . map (\(k,v) -> k ++ "=" ++ v)
-                   $ catMaybes [ fmap' toParam $ gSize         opts
-                               , fmap' toParam $ gDefault      opts
-                               ,       toParam $ gForceDefault opts
-                               , fmap' toParam $ gRating       opts
+                   $ catMaybes [ toParam =<< gSize         opts
+                               , toParam =<< gDefault      opts
+                               , toParam   $ gForceDefault opts
+                               , toParam =<< gRating       opts
                                ]
     where
         helper :: String -> [String] -> String
         helper u [] = u
         helper u l  = (++) u . (:) '?' $ intercalate "&" l
-
-        fmap' :: (a -> Maybe b) -> Maybe a -> Maybe b
-        fmap' _ Nothing  = Nothing
-        fmap' f (Just x) = f x
