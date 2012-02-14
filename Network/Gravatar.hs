@@ -12,13 +12,10 @@
 --
 -------------------------------------------------------------------------------
 module Network.Gravatar
-    ( Email
-    , gravatarImg
-    , hashEmail
+    ( gravatar
 
     -- * Options
     , GravatarOptions(..)
-    , GravatarParam(..)
     , Size(..)
     , DefaultImg(..)
     , ForceDefault(..)
@@ -34,8 +31,6 @@ import Network.HTTP.Base    (urlEncode)
 
 import qualified Data.ByteString.Lazy.Char8 as C8
 import qualified Data.Text as T
-
-type Email = Text
 
 class GravatarParam a where
     toParam :: a -> Maybe (String, String)
@@ -95,11 +90,11 @@ instance Default GravatarOptions where
         }
 
 -- | Return the avatar for the given email using the provided options 
-gravatarImg :: Email -> GravatarOptions -> String
-gravatarImg e opts = "http://www.gravatar.com/avatar/" ++ hashEmail e `addParams` opts
+gravatar :: Text -> GravatarOptions -> String
+gravatar e opts = "http://www.gravatar.com/avatar/" ++ hashEmail e `addParams` opts
 
 -- | <http://en.gravatar.com/site/implement/hash/>
-hashEmail :: Email -> String
+hashEmail :: Text -> String
 hashEmail = md5sum . T.toLower . T.strip
 
     where
