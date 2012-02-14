@@ -1,5 +1,5 @@
 name:                gravatar
-version:             0.4
+version:             0.5
 description:         A yesod goody, gravatar
 synopsis:            Look up gravatar image urls by email address
 homepage:            http://github.com/pbrisbin/yesod-goodies/gravatar
