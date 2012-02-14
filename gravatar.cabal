@@ -19,6 +19,7 @@ library
                , bytestring >= 0.9.1 && < 0.10
                , pureMD5    < 3
                , HTTP
+               , data-default
 
   ghc-options: -Wall
   

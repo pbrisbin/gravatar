@@ -20,13 +20,13 @@ module Network.Gravatar
     , GravatarOptions(..)
     , GravatarParam(..)
     , Size(..)
-    , Default(..)
+    , DefaultImg(..)
     , ForceDefault(..)
     , Rating(..)
-    , defaultOptions
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
+import Data.Default         (Default(..))
 import Data.List            (intercalate)
 import Data.Maybe           (catMaybes)
 import Data.Text            (Text)
@@ -53,15 +53,15 @@ instance GravatarParam ForceDefault where
     toParam (ForceDefault b) = if b then Just ("f", "y") else Nothing
 
 -- | Image to show when an avatar is not available
-data Default = Custom String -- ^ supply your own url
-             | NotFound      -- ^ do not load an image return a 404
-             | MM            -- ^ mystery man
-             | Identicon     -- ^ geometric pattern based on the hash
-             | MonsterId     -- ^ a generated monster
-             | Wavatar       -- ^ generated faces
-             | Retro         -- ^ generated, 8-bit arcade style pixelated face
+data DefaultImg = Custom String -- ^ supply your own url
+                | NotFound      -- ^ do not load an image return a 404
+                | MM            -- ^ mystery man
+                | Identicon     -- ^ geometric pattern based on the hash
+                | MonsterId     -- ^ a generated monster
+                | Wavatar       -- ^ generated faces
+                | Retro         -- ^ generated, 8-bit arcade style pixelated face
 
-instance GravatarParam Default where
+instance GravatarParam DefaultImg where
     toParam (Custom s) = Just ("d", urlEncode s)
     toParam NotFound   = Just ("d", "404"      )
     toParam MM         = Just ("d", "mm"       )
@@ -81,18 +81,18 @@ instance GravatarParam Rating where
 
 data GravatarOptions = GravatarOptions
     { gSize         :: Maybe Size
-    , gDefault      :: Maybe Default
+    , gDefault      :: Maybe DefaultImg
     , gForceDefault :: ForceDefault
     , gRating       :: Maybe Rating
     }
 
-defaultOptions :: GravatarOptions
-defaultOptions = GravatarOptions
-    { gSize         = Nothing
-    , gDefault      = Nothing
-    , gForceDefault = ForceDefault False
-    , gRating       = Nothing
-    }
+instance Default GravatarOptions where
+    def = GravatarOptions
+        { gSize         = Nothing
+        , gDefault      = Nothing
+        , gForceDefault = ForceDefault False
+        , gRating       = Nothing
+        }
 
 -- | Return the avatar for the given email using the provided options 
 gravatarImg :: Email -> GravatarOptions -> String
