@@ -90,8 +90,8 @@ instance Default GravatarOptions where
         }
 
 -- | Return the avatar for the given email using the provided options 
-gravatar :: Text -> GravatarOptions -> String
-gravatar e opts = "http://www.gravatar.com/avatar/" ++ hashEmail e `addParams` opts
+gravatar :: GravatarOptions -> Text -> String
+gravatar opts e = "http://www.gravatar.com/avatar/" ++ hashEmail e `addParams` opts
 
 -- | <http://en.gravatar.com/site/implement/hash/>
 hashEmail :: Text -> String
