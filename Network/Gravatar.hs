@@ -20,6 +20,7 @@ module Network.Gravatar
     , DefaultImg(..)
     , ForceDefault(..)
     , Rating(..)
+    , def
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
