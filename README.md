@@ -24,3 +24,5 @@ There's only a few small differences:
 
 2. My `gravatar` operates on a `Text` value
 
+The older package hasn't been updated since 2008 and I'm unable to reach 
+Don on the matter. Hopefully it's ok that I take over the module name.
