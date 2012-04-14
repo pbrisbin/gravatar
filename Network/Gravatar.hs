@@ -20,7 +20,7 @@ module Network.Gravatar
     , DefaultImg(..)
     , ForceDefault(..)
     , Rating(..)
-    , def
+    , defaultConfig
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
@@ -83,12 +83,15 @@ data GravatarOptions = GravatarOptions
     }
 
 instance Default GravatarOptions where
-    def = GravatarOptions
-        { gSize         = Nothing
-        , gDefault      = Nothing
-        , gForceDefault = ForceDefault False
-        , gRating       = Nothing
-        }
+    def = defaultConfig
+
+defaultConfig :: GravatarOptions
+defaultConfig = GravatarOptions
+    { gSize         = Nothing
+    , gDefault      = Nothing
+    , gForceDefault = ForceDefault False
+    , gRating       = Nothing
+    }
 
 -- | Return the avatar for the given email using the provided options 
 gravatar :: GravatarOptions -> Text -> String
