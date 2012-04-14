@@ -15,14 +15,12 @@ url = gravatar def "pbrisbin@gmail.com"
 This is a clean-room implementation of [this][] existing package (I had 
 no idea it existed when I wrote this).
 
-[this]: http://hackage.haskell.org/package/gravatar
+[this]: http://hackage.haskell.org/package/gravatar-0.3
 
 There's only a few small differences:
 
-1. I have only one function and a  required "options" argument which 
+1. I have only one function and a required "options" argument which 
    supports everything the Gravatar API offers.
 
 2. My `gravatar` operates on a `Text` value
 
-I've tried to reach out to Don about taking over maintainership, but 
-so far I've not gotten any reply.
