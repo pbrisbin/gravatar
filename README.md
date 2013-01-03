@@ -1,6 +1,7 @@
 # Gravatar
 
 ~~~ { .haskell }
+{-# LANGUAGE OverloadedStrings #-}
 import Network.Gravatar
 ~~~
 
@@ -9,6 +10,7 @@ Lookup gravatar image urls based on an email address.
 ~~~ { .haskell }
 url :: String
 url = gravatar def "pbrisbin@gmail.com"
+
 -- ==> https://secure.gravatar.com/avatar/2be502055b6c21ff470730beead2a998
 ~~~
 
