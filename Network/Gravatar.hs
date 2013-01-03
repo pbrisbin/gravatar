@@ -20,6 +20,7 @@ module Network.Gravatar
     , DefaultImg(..)
     , ForceDefault(..)
     , Rating(..)
+    , Default(..)
     , defaultConfig
     ) where
 
@@ -85,6 +86,7 @@ data GravatarOptions = GravatarOptions
 instance Default GravatarOptions where
     def = defaultConfig
 
+-- | Available for backwards compatability, using @def@ is advised
 defaultConfig :: GravatarOptions
 defaultConfig = GravatarOptions
     { gSize         = Nothing
