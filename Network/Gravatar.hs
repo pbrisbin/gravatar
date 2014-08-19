@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- |
 -- Module      :  Network.Gravatar
--- Copyright   :  (c) Patrick Brisbin 2010 
+-- Copyright   :  (c) Patrick Brisbin 2010
 -- License     :  as-is
 --
 -- Maintainer  :  pbrisbin@gmail.com
@@ -22,6 +22,7 @@ module Network.Gravatar
     , Rating(..)
     , Default(..)
     , defaultConfig
+    , Scheme (..)
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
@@ -81,7 +82,15 @@ data GravatarOptions = GravatarOptions
     , gDefault      :: Maybe DefaultImg
     , gForceDefault :: ForceDefault
     , gRating       :: Maybe Rating
+    , gScheme       :: Scheme
     }
+
+data Scheme = Http | Https | None
+
+instance Show Scheme where
+  show Http = "http://"
+  show Https = "https://"
+  show None = "//"
 
 instance Default GravatarOptions where
     def = defaultConfig
@@ -93,11 +102,13 @@ defaultConfig = GravatarOptions
     , gDefault      = Nothing
     , gForceDefault = ForceDefault False
     , gRating       = Nothing
+    , gScheme       = Http
     }
 
--- | Return the avatar for the given email using the provided options 
+-- | Return the avatar for the given email using the provided options
 gravatar :: GravatarOptions -> Text -> String
-gravatar opts e = "http://www.gravatar.com/avatar/" ++ hashEmail e `addParams` opts
+gravatar opts e = (show . gScheme $ opts) ++ "www.gravatar.com/avatar/"
+                                          ++ hashEmail e `addParams` opts
 
 -- | <http://en.gravatar.com/site/implement/hash/>
 hashEmail :: Text -> String
