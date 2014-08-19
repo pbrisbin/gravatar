@@ -22,10 +22,7 @@ module Network.Gravatar
     , Rating(..)
     , Default(..)
     , defaultConfig
-    , Scheme
-    , http
-    , https
-    , slashes
+    , Scheme (..)
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
@@ -85,19 +82,15 @@ data GravatarOptions = GravatarOptions
     , gDefault      :: Maybe DefaultImg
     , gForceDefault :: ForceDefault
     , gRating       :: Maybe Rating
-    , gScheme       :: Maybe Scheme
+    , gScheme       :: Scheme
     }
 
-newtype Scheme = Scheme { unScheme :: String }
+data Scheme = Http | Https | None
 
-http :: Scheme
-http = Scheme "http://"
-
-https :: Scheme
-https = Scheme "https://"
-
-slashes :: Scheme
-slashes = Scheme "//"
+instance Show Scheme where
+  show Http = "http://"
+  show Https = "https://"
+  show None = "//"
 
 instance Default GravatarOptions where
     def = defaultConfig
@@ -109,14 +102,13 @@ defaultConfig = GravatarOptions
     , gDefault      = Nothing
     , gForceDefault = ForceDefault False
     , gRating       = Nothing
-    , gScheme       = Just http
+    , gScheme       = Http
     }
 
 -- | Return the avatar for the given email using the provided options
 gravatar :: GravatarOptions -> Text -> String
-gravatar opts@(GravatarOptions _size _default _force _rating scheme) e =
-   (maybe [] unScheme $ scheme) ++ "www.gravatar.com/avatar/"
-                                ++ hashEmail e `addParams` opts
+gravatar opts e = (show . gScheme $ opts) ++ "www.gravatar.com/avatar/"
+                                          ++ hashEmail e `addParams` opts
 
 -- | <http://en.gravatar.com/site/implement/hash/>
 hashEmail :: Text -> String
