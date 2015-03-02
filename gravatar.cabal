@@ -1,5 +1,5 @@
 name:                gravatar
-version:             0.6
+version:             0.7
 description:         Look up gravatar image urls by email address
 synopsis:            Look up gravatar image urls by email address
 homepage:            http://github.com/pbrisbin/gravatar
