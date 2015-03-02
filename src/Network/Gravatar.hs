@@ -1,16 +1,3 @@
--------------------------------------------------------------------------------
--- |
--- Module      :  Network.Gravatar
--- Copyright   :  (c) Patrick Brisbin 2010
--- License     :  as-is
---
--- Maintainer  :  pbrisbin@gmail.com
--- Stability   :  unstable
--- Portability :  unportable
---
--- <http://en.gravatar.com/>.
---
--------------------------------------------------------------------------------
 module Network.Gravatar
     ( gravatar
 
@@ -20,9 +7,9 @@ module Network.Gravatar
     , DefaultImg(..)
     , ForceDefault(..)
     , Rating(..)
+    , Scheme (..)
     , Default(..)
     , defaultConfig
-    , Scheme (..)
     ) where
 
 import Data.Digest.Pure.MD5 (md5)
