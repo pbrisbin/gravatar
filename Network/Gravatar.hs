@@ -102,7 +102,7 @@ defaultConfig = GravatarOptions
     , gDefault      = Nothing
     , gForceDefault = ForceDefault False
     , gRating       = Nothing
-    , gScheme       = Http
+    , gScheme       = Https
     }
 
 -- | Return the avatar for the given email using the provided options
