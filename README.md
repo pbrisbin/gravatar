@@ -1,6 +1,6 @@
 # Gravatar
 
-Generate Gravatar images URLs.
+Generate Gravatar image URLs.
 
 ## Installation
 
@@ -17,7 +17,7 @@ gravatar def "pbrisbin@gmail.com"
 
 For more information, see the [haddocks][].
 
-[docs]: http://hackage.haskell.org/package/gravatar/docs/Network-Gravatar.html
+[haddocks]: http://hackage.haskell.org/package/gravatar/docs/Network-Gravatar.html
 
 ## Developing & Tests
 
@@ -39,5 +39,5 @@ There's only a few small differences:
    everything the Gravatar API offers.
 2. My `gravatar` operates on a `Text` value
 
-The older package hasn't been updated since 2008 and I'm unable to reach Don on
-the matter. Hopefully it's OK that I take over the module name.
+The older package hadn't been updated since 2008 and I was unable to reach Don
+on the matter. Hopefully it's OK that I take over the module name.
