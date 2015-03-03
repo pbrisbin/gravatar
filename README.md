@@ -1,5 +1,10 @@
 # Gravatar
 
+[![Build Status][icon]][build]
+
+[icon]: https://travis-ci.org/pbrisbin/gravatar.svg?branch=master
+[build]: https://travis-ci.org/pbrisbin/gravatar
+
 Generate Gravatar image URLs.
 
 ## Installation
