@@ -30,6 +30,7 @@ test-suite spec
   build-depends:        base
                       , hspec
                       , gravatar
+                      , text
 
 source-repository head
   type:                 git
