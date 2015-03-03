@@ -12,12 +12,12 @@ module Network.Gravatar
     , defaultConfig
     ) where
 
+import Data.Default (Default(..))
 import Data.Digest.Pure.MD5 (md5)
-import Data.Default         (Default(..))
-import Data.List            (intercalate)
-import Data.Maybe           (catMaybes)
-import Data.Text            (Text)
-import Network.HTTP.Base    (urlEncode)
+import Data.List (intercalate)
+import Data.Maybe (catMaybes)
+import Data.Text (Text)
+import Network.HTTP.Base (urlEncode)
 
 import qualified Data.ByteString.Lazy.Char8 as C8
 import qualified Data.Text as T
@@ -35,44 +35,50 @@ instance GravatarParam Size where
 newtype ForceDefault = ForceDefault Bool
 
 instance GravatarParam ForceDefault where
-    toParam (ForceDefault b) = if b then Just ("f", "y") else Nothing
+    toParam (ForceDefault True) = Just ("f", "y")
+    toParam (ForceDefault False) = Nothing
 
 -- | Image to show when an avatar is not available
-data DefaultImg = Custom String -- ^ supply your own url
-                | NotFound      -- ^ do not load an image return a 404
-                | MM            -- ^ mystery man
-                | Identicon     -- ^ geometric pattern based on the hash
-                | MonsterId     -- ^ a generated monster
-                | Wavatar       -- ^ generated faces
-                | Retro         -- ^ generated, 8-bit arcade style pixelated face
+data DefaultImg
+    = Custom String -- ^ supply your own url
+    | NotFound      -- ^ do not load an image return a 404
+    | MM            -- ^ mystery man
+    | Identicon     -- ^ geometric pattern based on the hash
+    | MonsterId     -- ^ a generated monster
+    | Wavatar       -- ^ generated faces
+    | Retro         -- ^ generated, 8-bit arcade style pixelated face
 
 instance GravatarParam DefaultImg where
     toParam (Custom s) = Just ("d", urlEncode s)
-    toParam NotFound   = Just ("d", "404"      )
-    toParam MM         = Just ("d", "mm"       )
-    toParam Identicon  = Just ("d", "identicon")
-    toParam MonsterId  = Just ("d", "monsterid")
-    toParam Wavatar    = Just ("d", "wavatar"  )
-    toParam Retro      = Just ("d", "retro"    )
+    toParam NotFound = Just ("d", "404")
+    toParam MM = Just ("d", "mm")
+    toParam Identicon = Just ("d", "identicon")
+    toParam MonsterId = Just ("d", "monsterid")
+    toParam Wavatar = Just ("d", "wavatar")
+    toParam Retro = Just ("d", "retro")
 
 -- | Limit the returned images by rating
 data Rating = G | PG | R | X
 
 instance GravatarParam Rating where
-    toParam G  = Just ("r", "g" )
+    toParam G = Just ("r", "g")
     toParam PG = Just ("r", "pg")
-    toParam R  = Just ("r", "r" )
-    toParam X  = Just ("r", "x" )
+    toParam R = Just ("r", "r")
+    toParam X = Just ("r", "x")
 
 data GravatarOptions = GravatarOptions
-    { gSize         :: Maybe Size
-    , gDefault      :: Maybe DefaultImg
-    , gForceDefault :: ForceDefault
-    , gRating       :: Maybe Rating
-    , gScheme       :: Scheme
+    { gSize :: Maybe Size           -- ^ default @Nothing@
+    , gDefault :: Maybe DefaultImg  -- ^ default @Nothing@
+    , gForceDefault :: ForceDefault -- ^ default @False@
+    , gRating :: Maybe Rating       -- ^ default @Nothing@
+    , gScheme :: Scheme             -- ^ default @Https@
     }
 
-data Scheme = Http | Https | None
+-- | Scheme to use for image URLs
+data Scheme
+    = Http  -- ^ @http://@
+    | Https -- ^ @https://@
+    | None  -- ^ @//@
 
 instance Show Scheme where
   show Http = "http://"
@@ -85,11 +91,11 @@ instance Default GravatarOptions where
 -- | Available for backwards compatability, using @def@ is advised
 defaultConfig :: GravatarOptions
 defaultConfig = GravatarOptions
-    { gSize         = Nothing
-    , gDefault      = Nothing
+    { gSize = Nothing
+    , gDefault = Nothing
     , gForceDefault = ForceDefault False
-    , gRating       = Nothing
-    , gScheme       = Https
+    , gRating = Nothing
+    , gScheme = Https
     }
 
 -- | Return the avatar for the given email using the provided options
