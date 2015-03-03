@@ -8,7 +8,7 @@ module Network.Gravatar
     , ForceDefault(..)
     , Rating(..)
     , Scheme (..)
-    , Default(..)
+    , Default(def)
     , defaultConfig
     ) where
 
