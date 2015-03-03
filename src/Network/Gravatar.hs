@@ -100,25 +100,30 @@ defaultConfig = GravatarOptions
 
 -- | Return the avatar for the given email using the provided options
 gravatar :: GravatarOptions -> Text -> String
-gravatar opts e = (show . gScheme $ opts) ++ "www.gravatar.com/avatar/"
-                                          ++ hashEmail e `addParams` opts
+gravatar opts e = concat
+    [ show $ gScheme opts
+    , "www.gravatar.com/avatar/"
+    , hashEmail e
+    , queryString opts
+    ]
 
 -- | <http://en.gravatar.com/site/implement/hash/>
 hashEmail :: Text -> String
-hashEmail = md5sum . T.toLower . T.strip
+hashEmail = show . md5 . C8.pack . T.unpack . T.toLower . T.strip
 
-    where
-        md5sum :: Text -> String
-        md5sum = show . md5 . C8.pack . T.unpack
+queryString :: GravatarOptions -> String
+queryString opts = case queryParts of
+    [] -> ""
+    ps -> "?" ++ intercalate "&" (map queryPart ps)
 
-addParams :: String -> GravatarOptions -> String
-addParams url opts = helper url . map (\(k,v) -> k ++ "=" ++ v)
-                   $ catMaybes [ toParam =<< gSize         opts
-                               , toParam =<< gDefault      opts
-                               , toParam   $ gForceDefault opts
-                               , toParam =<< gRating       opts
-                               ]
-    where
-        helper :: String -> [String] -> String
-        helper u [] = u
-        helper u l  = (++) u . (:) '?' $ intercalate "&" l
+  where
+    queryParts :: [(String, String)]
+    queryParts = catMaybes
+        [ toParam =<< gSize opts
+        , toParam =<< gDefault opts
+        , toParam   $ gForceDefault opts
+        , toParam =<< gRating opts
+        ]
+
+    queryPart :: (String, String) -> String
+    queryPart (k, v) = k ++ "=" ++ v
