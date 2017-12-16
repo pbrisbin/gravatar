@@ -1,0 +1,32 @@
+---
+name: gravatar
+version: '0.8.0'
+synopsis: Generate Gravatar image URLs
+description: Generate Gravatar image URLs
+author: Pat Brisbin <pbrisbin@gmail.com>
+maintainer: Pat Brisbin <pbrisbin@gmail.com>
+license: MIT
+github: pbrisbin/gravatar
+
+dependencies:
+  - base > 4.8.0 && < 5
+
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  dependencies:
+    - text >=0.11 && <2.0
+    - bytestring >=0.9.1 && <0.11
+    - pureMD5 <3
+    - HTTP
+    - data-default
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options: -Wall
+    dependencies:
+      - hspec
+      - gravatar
+      - text
