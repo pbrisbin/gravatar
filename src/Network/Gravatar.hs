@@ -99,6 +99,34 @@ defaultConfig = GravatarOptions
     }
 
 -- | Return the avatar for the given email using the provided options
+--
+-- >>> gravatar def "pbrisbin@gmail.com"
+-- "https://www.gravatar.com/avatar/2be502055b6c21ff470730beead2a998"
+--
+-- Whitespace is trimmed.
+--
+-- >>> gravatar def " pbrisbin@gmail.com   "
+-- "https://www.gravatar.com/avatar/2be502055b6c21ff470730beead2a998"
+--
+-- Case is ignored.
+--
+-- >>> gravatar def "PBrisbin@GMAIL.com"
+-- "https://www.gravatar.com/avatar/2be502055b6c21ff470730beead2a998"
+--
+-- Options are supported.
+--
+-- >>> :{
+--   let opts = GravatarOptions
+--           { gSize = Just $ Size 24
+--           , gDefault = Just NotFound
+--           , gForceDefault = ForceDefault True
+--           , gRating = Just G
+--           , gScheme = Http
+--           }
+--   in gravatar opts "pbrisbin@gmail.com"
+-- :}
+-- "http://www.gravatar.com/avatar/2be502055b6c21ff470730beead2a998?s=24&d=404&f=y&r=g"
+--
 gravatar :: GravatarOptions -> Text -> String
 gravatar opts e = concat
     [ show $ gScheme opts

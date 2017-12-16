@@ -30,3 +30,11 @@ tests:
       - hspec
       - gravatar
       - text
+
+  doctest:
+    main: DocTest.hs
+    source-dirs: test
+    ghc-options: -Wall
+    dependencies:
+      - doctest
+      - Glob
