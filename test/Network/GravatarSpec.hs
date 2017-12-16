@@ -1,14 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Network.GravatarSpec where
+module Network.GravatarSpec
+    ( spec
+    ) where
 
+import Data.Monoid ((<>))
 import Network.Gravatar
 import Test.Hspec
-import Data.Monoid ((<>))
 
 import qualified Data.Text as T
-
-main :: IO ()
-main = hspec spec
 
 spec :: Spec
 spec = describe "gravatar" $ do
