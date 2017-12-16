@@ -1,17 +1,8 @@
 # Gravatar
 
-[![Build Status][icon]][build]
-
-[icon]: https://travis-ci.org/pbrisbin/gravatar.svg?branch=master
-[build]: https://travis-ci.org/pbrisbin/gravatar
+[![Build Status](https://circleci.com/gh/pbrisbin/gravatar/tree/master.png)](https://circleci.com/gh/pbrisbin/gravatar)
 
 Generate Gravatar image URLs.
-
-## Installation
-
-```
-% cabal install gravatar
-```
 
 ## Usage
 
@@ -27,11 +18,11 @@ For more information, see the [haddocks][].
 ## Developing & Tests
 
 ```
-% cabal install --dependencies-only --enable-tests
-% cabal test
+stack setup
+stack build --pedantic --test
 ```
 
-## History
+## Historical Note
 
 This is a clean-room implementation of [this][] existing package (I had no idea
 it existed when I wrote this).
@@ -46,3 +37,7 @@ There's only a few small differences:
 
 The older package hadn't been updated since 2008 and I was unable to reach Don
 on the matter. Hopefully it's OK that I take over the module name.
+
+---
+
+[CHANGELOG](./CHANGELOG.md) | [LICENSE](./LICENSE)
