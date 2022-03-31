@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           gravatar
-version:        0.8.0
+version:        0.8.1
 synopsis:       Generate Gravatar image URLs
 description:    Generate Gravatar image URLs
 homepage:       https://github.com/pbrisbin/gravatar#readme
