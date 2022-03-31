@@ -1,0 +1,65 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           gravatar
+version:        0.8.0
+synopsis:       Generate Gravatar image URLs
+description:    Generate Gravatar image URLs
+homepage:       https://github.com/pbrisbin/gravatar#readme
+bug-reports:    https://github.com/pbrisbin/gravatar/issues
+author:         Pat Brisbin <pbrisbin@gmail.com>
+maintainer:     Pat Brisbin <pbrisbin@gmail.com>
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/pbrisbin/gravatar
+
+library
+  exposed-modules:
+      Network.Gravatar
+  other-modules:
+      Paths_gravatar
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      HTTP
+    , base >4.8.0 && <5
+    , bytestring
+    , data-default
+    , pureMD5
+    , text
+  default-language: Haskell2010
+
+test-suite doctest
+  type: exitcode-stdio-1.0
+  main-is: DocTest.hs
+  other-modules:
+      Paths_gravatar
+  hs-source-dirs:
+      ./
+  ghc-options: -Wall
+  build-depends:
+      Glob
+    , base >4.8.0 && <5
+    , doctest
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_gravatar
+  hs-source-dirs:
+      test
+  ghc-options: -Wall
+  build-depends:
+      base >4.8.0 && <5
+    , hspec
+  default-language: Haskell2010
