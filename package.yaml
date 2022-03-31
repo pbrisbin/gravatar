@@ -1,6 +1,5 @@
----
 name: gravatar
-version: '0.8.0'
+version: 0.8.0
 synopsis: Generate Gravatar image URLs
 description: Generate Gravatar image URLs
 author: Pat Brisbin <pbrisbin@gmail.com>
@@ -15,9 +14,9 @@ library:
   source-dirs: src
   ghc-options: -Wall
   dependencies:
-    - text >=0.11 && <2.0
-    - bytestring >=0.9.1 && <0.11
-    - pureMD5 <3
+    - text
+    - bytestring
+    - pureMD5
     - HTTP
     - data-default
 

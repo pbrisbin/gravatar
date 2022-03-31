@@ -1,6 +1,6 @@
 # Gravatar
 
-[![Build Status](https://circleci.com/gh/pbrisbin/gravatar/tree/master.png)](https://circleci.com/gh/pbrisbin/gravatar)
+[![CI](https://github.com/pbrisbin/gravatar/actions/workflows/ci.yml/badge.svg)](https://github.com/pbrisbin/gravatar/actions/workflows/ci.yml)
 
 Generate Gravatar image URLs.
 
